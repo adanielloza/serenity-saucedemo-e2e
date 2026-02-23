@@ -1,0 +1,24 @@
+CONCLUSIONES Y HALLAZGOS - EJERCICIO 1 (SauceDemo E2E)
+
+1. Resultado general
+La prueba E2E se ejecutó correctamente y validó el flujo completo de compra en SauceDemo:
+- Autenticación exitosa con standard_user / secret_sauce
+- Se agregaron dos productos al carrito
+- Se visualizó el carrito con los ítems
+- Se completó el formulario de checkout
+- Se finalizó la compra y se verificó el mensaje de confirmación
+
+2. Hallazgos técnicos relevantes
+- Estabilidad (flakiness): durante el desarrollo se identificaron fallos por sincronización típicos de E2E (elementos no interactuables, timeouts).
+  Se mitigó aplicando esperas explícitas (waitUntilVisible / waitUntilClickable) antes de interactuar con elementos críticos del checkout.
+- Validación del mensaje final: el texto visual puede variar en formato (mayúsculas/minúsculas y signos).
+  Para evitar falsos negativos, la comparación se realizó de forma robusta normalizando el texto (trim + lower + eliminación de puntuación).
+
+3. Evidencias
+- Reporte Serenity generado (HTML) con evidencia de ejecución:
+  - target/site/serenity/index.html
+  - Copia estable incluida en el repositorio: reports/serenity/index.html
+
+4. Conclusión
+El flujo de compra en SauceDemo quedó cubierto de punta a punta por una prueba automatizada E2E con Serenity BDD.
+La automatización es reproducible y está documentada para ser ejecutada en un entorno local con Java 17 + Maven.
